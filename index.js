@@ -7,7 +7,7 @@ var board = new five.Board({
 var bmp180_lib = require("./lib/bmp180");
 
 const SELECT_PIN = ['GP28', 'GP111', 'GP109'];
-const BMP180_COUNT = 5;
+const BMP180_COUNT = 4;
 
 var bmp180 = new bmp180_lib({
 	select_pins: SELECT_PIN,
@@ -15,7 +15,7 @@ var bmp180 = new bmp180_lib({
 	//debug: true,
 	//freq: 2000,
 	board: board,
-	default_pressure: [45734, 90039, 86889, 91889, 97966 ]
+	default_pressure: [45734, 90069, 86889, 91889, 97966 ]
 });
 
 
