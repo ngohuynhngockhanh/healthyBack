@@ -4,41 +4,27 @@ var board = new five.Board({
   io: new Edison()
 });
 
+var bmp180_lib = require("./lib/bmp180");
+
 const SELECT_PIN = ['GP28', 'GP111', 'GP109'];
 const BMP180_COUNT = 4;
 
+var bmp180 = new bmp180_lib({
+	select_pins: SELECT_PIN,
+	sensor_count: BMP180_COUNT,
+	debug: true,
+	freq: 2000,
+	board: board
+});
+
+
+
+
+
 
 board.on("ready", function() {
-	//pinMode bmp180 select
-	for (var i = 0; i < SELECT_PIN.length; i++)
-		this.pinMode(SELECT_PIN[i], five.Pin.OUTPUT);
 	
+	bmp180.start();
+
 	
-	//define function
-	var id = 0;
-	var toogleBMP = function() {
-		console.log("Select BMP " + id);
-		for (var i = 0; i < SELECT_PIN.length; i++)
-			if ((id >> i) & 1)
-				this.digitalWrite(SELECT_PIN[i], 1);
-			else 
-				this.digitalWrite(SELECT_PIN[i], 0);
-		
-		
-		if (++id >= BMP180_COUNT)
-			id = 0;
-	}.bind(this);
-
-	toogleBMP();
-	var barometer = five.IMU.Drivers.get(this, "BMP180", {});
-
-	barometer.emit("start");
-	barometer.on("data", function(data) {
-	    this.emit("pause");
-		console.log(data.pressure);
-		toogleBMP();
-		setTimeout(function() {
-			this.emit("resume");
-		}.bind(this), 20);
-	});
 });
