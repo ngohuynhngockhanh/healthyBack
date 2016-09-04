@@ -16,9 +16,10 @@ var controller = new controller_lib({
 	bmp_select_pin: ['GP28', 'GP111', 'GP109'],
 	bumps: [{
 		vibrate: ['GP80', 'GP81'],
-		bump: 'GP182',
+		bump: 'GP44',
 		lock: 'GP115',
-		pressureDelta: 100770
+		pressureDelta: 100770,
+		maxPressure: 8100
 	}]
 });
 
