@@ -43,6 +43,11 @@ var controller = new controller_lib({
 		bump: 'GP45',
 		lock: 'GP40',
 		pressureDelta: 108770 + 500 -10936
+	},{
+		vibrate: ['GP114', 'GP110'],
+		bump: 'GP130',
+		lock: 'GP129',
+		pressureDelta: 108770 + 500 -10936 -7934
 	}]
 });
 
