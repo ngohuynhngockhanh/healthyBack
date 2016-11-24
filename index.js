@@ -1,7 +1,9 @@
 var five = require("johnny-five");
 var Edison = require("edison-io");
 var board = new five.Board({
-  io: new Edison()
+  io: new Edison(),
+  repl: false,
+  debug: false,
 });
 
 var app = require('express')();
@@ -32,29 +34,39 @@ var controller = new controller_lib({
 		vibrate: ['GP79', 'GP78'],
 		bump: 'GP49',
 		lock: 'GP82',
-		pressureDelta: 108770 + 500 - 14634 - 220
+		pressureDelta: 108770 + 500 - 14634 - 220 + 2000
 	},{
 		vibrate: ['GP41', 'GP42'],
 		bump: 'GP47',
 		lock: 'GP43',
-		pressureDelta: 100770 - 8248
+		pressureDelta: 100770 - 8248 + 1000
 	},{
 		vibrate: ['GP84', 'GP128'],
 		bump: 'GP45',
 		lock: 'GP40',
-		pressureDelta: 108770 + 500 -10936
+		pressureDelta: 108770 + 500 -10936 + 4190 +2200
 	},{
 		vibrate: ['GP114', 'GP110'],
 		bump: 'GP130',
 		lock: 'GP129',
-		pressureDelta: 108770 + 500 -10936 -7934
+		pressureDelta: 108770 + 500 -10936 + 4190 -12160 + 3333
 	}]
 });
 
 
 
 board.on("ready", function() {
-	
+	this.pinMode('GP46', five.Pin.OUTPUT);
+	this.digitalWrite('GP46', 1);
+	var imu = new five.IMU({
+		controller: "MPU6050",
+		freq: 1000
+	 });
+	 imu.on("data", function() {
+		//console.log(this.gyro.pitch); 
+		console.log(this.gyro.pitch);
+		io.sockets.emit("pitch", this.gyro.pitch);
+	}); 
 });
 
 
