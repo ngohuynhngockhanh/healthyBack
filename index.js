@@ -41,8 +41,9 @@ var controller = new controller_lib({
 
 
 board.on("ready", function() {
-	/*this.pinMode('GP46', five.Pin.OUTPUT);
-	this.digitalWrite('GP46', 1);
+	this.pinMode(MPU6050_ENABLE_PIN, five.Pin.OUTPUT);
+	this.digitalWrite(MPU6050_ENABLE_PIN 1);
+	/*
 	var imu = new five.IMU({
 		controller: "MPU6050",
 		freq: 1000
