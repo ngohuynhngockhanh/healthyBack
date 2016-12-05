@@ -42,7 +42,7 @@ var controller = new controller_lib({
 
 board.on("ready", function() {
 	this.pinMode(MPU6050_ENABLE_PIN, five.Pin.OUTPUT);
-	this.digitalWrite(MPU6050_ENABLE_PIN 1);
+	this.digitalWrite(MPU6050_ENABLE_PIN, 1);
 	/*
 	var imu = new five.IMU({
 		controller: "MPU6050",
